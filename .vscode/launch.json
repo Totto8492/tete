@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}",
+            "name": "Debug with OpenOCD",
+            "request": "launch",
+            "openOCDLaunchCommands": [
+                "program target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}"
+            ],
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/rp2040.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "numberOfProcessors": 2
+        },
+        {
+            "preLaunchTask": "rust: cargo build",
+            "type": "probe-rs-debug",
+            "request": "launch",
+            "name": "rp2040-template",
+            "cwd": "${workspaceFolder}",
+            "chip": "rp2040",
+            "runtimeArgs": [
+                "debug",
+            ],
+            "flashingConfig": {
+                "flashingEnabled": true,
+                "resetAfterFlashing": true,
+            },
+            "coreConfigs": [
+                {
+                    "coreIndex": 0,
+                    "programBinary": "target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}",
+                    "chip": "RP2040",
+                    "svdFile": ".vscode/rp2040.svd",
+                    "rttEnabled": true,
+                    "rttChannelFormats": [
+                        {
+                            "channelNumber": 0,
+                            "showTimestamps": false,
+                            "showLocation": false
+                        },
+                    ],
+                }
+            ],
+            "consoleLogLevel": "Console",
+        }
+    ]
+}
