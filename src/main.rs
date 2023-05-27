@@ -26,7 +26,7 @@ enum LedState {
     Off,
 }
 
-#[cortex_m_rt::entry]
+#[embassy_executor::entry]
 fn main() -> ! {
     rtt_init_print!();
     let p = embassy_rp::init(Default::default());
