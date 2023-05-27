@@ -1,11 +1,11 @@
 use embassy_time::{Duration, Timer};
-use rtt_target::rprintln as info;
+use rtt_target::rprintln;
 
-use super::{LedState, CHANNEL};
+use crate::{LedState, CHANNEL};
 
 #[embassy_executor::task]
 pub async fn task() {
-    info!("Hello from core 0");
+    rprintln!("Hello from core 0");
     loop {
         CHANNEL.send(LedState::On).await;
         Timer::after(Duration::from_millis(100)).await;

@@ -2,29 +2,22 @@
 #![no_main]
 #![feature(type_alias_impl_trait)]
 
-use embassy_executor::{Executor};
 use embassy_rp::gpio::{Level, Output};
-use embassy_rp::multicore::spawn_core1;
-#[allow(unused)]
-use rtt_target::rprintln as info;
-#[allow(unused)]
-use rtt_target::{rdbg, rprint, rprintln, rtt_init_print};
-use {{crate_name}}::{core0, core1, CORE1_STACK, EXECUTOR0, EXECUTOR1};
+use rtt_target::{rprintln, rtt_init_print};
+use {{crate_name}}::{core0, core1, run_task, run_task_with, timeout};
 use {panic_rtt_target as _, rtt_target as _};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
     rtt_init_print!();
-    info!("--- RESET ---");
+    rprintln!("--- RESET ---");
     let p = embassy_rp::init(Default::default());
 
-    let led = Output::new(p.PIN_5, Level::Low);
+    let led = Output::new(p.PIN_25, Level::Low);
 
-    spawn_core1(p.CORE1, unsafe { &mut CORE1_STACK }, move || {
-        let executor1 = EXECUTOR1.init(Executor::new());
-        executor1.run(|spawner| (spawner.spawn(core1::task(led))).unwrap());
+    run_task_with(p.CORE1, |spawner| (spawner.spawn(core1::task(led))).unwrap());
+    run_task(|spawner| {
+        spawner.spawn(core0::task()).unwrap();
+        spawner.spawn(timeout::task()).unwrap();
     });
-
-    let executor0 = EXECUTOR0.init(Executor::new());
-    executor0.run(|spawner| (spawner.spawn(core0::task())).unwrap());
 }
