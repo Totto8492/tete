@@ -12,10 +12,12 @@ use rtt_target::{rdbg, rprint, rprintln, rtt_init_print};
 use your_project_name::{core0, core1, CORE1_STACK, EXECUTOR0, EXECUTOR1};
 use {panic_rtt_target as _, rtt_target as _};
 
-#[embassy_executor::main]
-async fn main(_spawner: Spawner) -> ! {
+#[cortex_m_rt::entry]
+fn main() -> ! {
     rtt_init_print!();
+    info!("--- RESET ---");
     let p = embassy_rp::init(Default::default());
+
     let led = Output::new(p.PIN_5, Level::Low);
 
     spawn_core1(p.CORE1, unsafe { &mut CORE1_STACK }, move || {
