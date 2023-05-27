@@ -9,7 +9,7 @@ use embassy_rp::multicore::spawn_core1;
 use rtt_target::rprintln as info;
 #[allow(unused)]
 use rtt_target::{rdbg, rprint, rprintln, rtt_init_print};
-use {{project_name}}::{core0, core1, CORE1_STACK, EXECUTOR0, EXECUTOR1};
+use {{crate_name}}::{core0, core1, CORE1_STACK, EXECUTOR0, EXECUTOR1};
 use {panic_rtt_target as _, rtt_target as _};
 
 #[cortex_m_rt::entry]
