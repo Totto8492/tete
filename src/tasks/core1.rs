@@ -2,7 +2,7 @@ use embassy_rp::gpio::Output;
 use embassy_rp::peripherals::PIN_25;
 use rtt_target::rprintln;
 
-use crate::{LedState, CHANNEL};
+use crate::tasks::state::*;
 
 #[embassy_executor::task]
 pub async fn task(mut led: Output<'static, PIN_25>) {
