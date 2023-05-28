@@ -77,7 +77,7 @@ impl Priority {
     }
 }
 
-pub fn run_prioritized_task(prio: Priority, token: impl FnOnce(embassy_executor::SendSpawner) + Send + 'static) {
+pub fn run_preemptive_task(prio: Priority, token: impl FnOnce(embassy_executor::SendSpawner) + Send + 'static) {
     unsafe {
         let mut nvic = cortex_m::Peripherals::steal().NVIC;
         nvic.set_priority(prio.irq, prio.prio << 6);
@@ -86,7 +86,7 @@ pub fn run_prioritized_task(prio: Priority, token: impl FnOnce(embassy_executor:
     token(spawner);
 }
 
-pub fn run_task_with(
+pub fn run_task_at(
     core1: embassy_rp::peripherals::CORE1,
     token: impl FnOnce(embassy_executor::Spawner) + Send + 'static,
 ) {

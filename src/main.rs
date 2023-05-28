@@ -4,7 +4,7 @@
 
 use embassy_rp::gpio::{Level, Output};
 use {{crate_name}}::tasks::*;
-use {{crate_name}}::{run_prioritized_task, run_task, run_task_with, Priority};
+use {{crate_name}}::{run_preemptive_task, run_task, run_task_at, Priority};
 use rtt_target::{rprintln, rtt_init_print};
 use {panic_rtt_target as _, rtt_target as _};
 
@@ -16,9 +16,9 @@ fn main() -> ! {
 
     let led = Output::new(p.PIN_25, Level::Low);
 
-    run_task_with(p.CORE1, |spawner| (spawner.spawn(core1::task(led))).unwrap());
-    run_prioritized_task(Priority::medium(), |spawner| spawner.spawn(core0::run_med()).unwrap());
-    run_prioritized_task(Priority::high(), |spawner| spawner.spawn(core0::run_high()).unwrap());
+    run_preemptive_task(Priority::medium(), |spawner| spawner.spawn(core0::run_med()).unwrap());
+    run_preemptive_task(Priority::high(), |spawner| spawner.spawn(core0::run_high()).unwrap());
+    run_task_at(p.CORE1, |spawner| (spawner.spawn(core1::task(led))).unwrap());
     run_task(|spawner| {
         spawner.spawn(core0::task()).unwrap();
         spawner.spawn(timeout::task()).unwrap();
