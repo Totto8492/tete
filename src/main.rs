@@ -3,7 +3,6 @@
 #![feature(type_alias_impl_trait)]
 
 use embassy_rp::gpio::{Level, Output};
-use {{crate_name}}::tasks::*;
 use {{crate_name}}::{run_preemptive_task, run_task, run_task_at, Priority};
 use rtt_target::{rprintln, rtt_init_print};
 use {panic_rtt_target as _, rtt_target as _};
