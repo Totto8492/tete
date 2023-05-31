@@ -8,6 +8,9 @@ use {{crate_name}}::{run_preemptive_task, run_task, run_task_at, Priority};
 use rtt_target::{rprintln, rtt_init_print};
 use {panic_rtt_target as _, rtt_target as _};
 
+mod tasks;
+use tasks::*;
+
 #[cortex_m_rt::entry]
 fn main() -> ! {
     rtt_init_print!();

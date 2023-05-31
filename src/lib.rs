@@ -2,7 +2,6 @@
 #![no_main]
 #![feature(type_alias_impl_trait)]
 
-pub mod tasks;
 use embassy_executor::_export::StaticCell;
 use embassy_executor::{Executor, InterruptExecutor};
 use embassy_rp::interrupt;
