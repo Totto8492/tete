@@ -85,7 +85,7 @@ pub fn run_preemptive_task(prio: Priority, token: impl FnOnce(embassy_executor::
     token(spawner);
 }
 
-pub fn run_task_at(
+pub fn run_task_on(
     core1: embassy_rp::peripherals::CORE1,
     token: impl FnOnce(embassy_executor::Spawner) + Send + 'static,
 ) {
