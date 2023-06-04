@@ -10,8 +10,21 @@ use {panic_rtt_target as _, rtt_target as _};
 mod tasks;
 use tasks::*;
 
+// https://github.com/rp-rs/rp-hal/blob/main/rp2040-hal-macros/src/lib.rs
+unsafe fn clear_locks() {
+    const SIO_BASE: u32 = 0xd0000000;
+    const SPINLOCK0_PTR: *mut u32 = (SIO_BASE + 0x100) as *mut u32;
+    const SPINLOCK_COUNT: usize = 32;
+    for i in 0..SPINLOCK_COUNT {
+        SPINLOCK0_PTR.wrapping_add(i).write_volatile(1);
+    }
+}
+
 #[cortex_m_rt::entry]
 fn main() -> ! {
+    unsafe {
+        clear_locks();
+    }
     rtt_init_print!();
     rprintln!("--- RESET ---");
     let p = embassy_rp::init(Default::default());
