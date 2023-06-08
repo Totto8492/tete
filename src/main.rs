@@ -12,11 +12,8 @@ use tasks::*;
 
 unsafe fn clear_locks() {
     // https://github.com/rp-rs/rp-hal/blob/main/rp2040-hal-macros/src/lib.rs
-    const SIO_BASE: *mut u8 = embassy_rp::pac::SIO.0;
-    const SPINLOCK0_PTR: *mut u32 = SIO_BASE.wrapping_add(0x100) as *mut u32;
-    const SPINLOCK_COUNT: usize = 32;
-    for i in 0..SPINLOCK_COUNT {
-        SPINLOCK0_PTR.add(i).write_volatile(1);
+    for i in 0..32 {
+        embassy_rp::pac::SIO.spinlock(i).write_value(1);
     }
 }
 
