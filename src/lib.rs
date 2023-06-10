@@ -33,6 +33,7 @@ unsafe fn SWI_IRQ_2() {
     EXECUTOR_MEDIUM.on_interrupt()
 }
 
+#[embassy_rp::interrupt]
 unsafe fn SWI_IRQ_3() {
     EXECUTOR_HIGH.on_interrupt()
 }
