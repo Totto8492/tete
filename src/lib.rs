@@ -3,10 +3,11 @@
 #![feature(type_alias_impl_trait)]
 
 use embassy_executor::_export::StaticCell;
-use embassy_executor::{Executor, InterruptExecutor};
-use embassy_rp::interrupt;
+use embassy_executor::{Executor, InterruptExecutor, SendSpawner};
+use embassy_rp::interrupt::{self, InterruptExt, Priority};
 use embassy_rp::multicore::{spawn_core1, Stack};
 use embassy_rp::pac::Interrupt;
+use embassy_rp::peripherals::CORE1;
 
 static mut CORE1_STACK: Stack<4096> = Stack::new();
 static EXECUTOR0: StaticCell<Executor> = StaticCell::new();
@@ -36,18 +37,18 @@ unsafe fn SWI_IRQ_0() {
     EXECUTOR_HIGH.on_interrupt()
 }
 
-pub struct Priority {
+pub struct IrqPriority {
     irq: Interrupt,
     executor: &'static InterruptExecutor,
-    prio: u8,
+    prio: Priority,
 }
 
-impl Priority {
+impl IrqPriority {
     pub fn idle() -> Self {
         Self {
             irq: Interrupt::SWI_IRQ_3,
             executor: &EXECUTOR_IDLE,
-            prio: 3,
+            prio: Priority::P3,
         }
     }
 
@@ -55,7 +56,7 @@ impl Priority {
         Self {
             irq: Interrupt::SWI_IRQ_2,
             executor: &EXECUTOR_LOW,
-            prio: 2,
+            prio: Priority::P2,
         }
     }
 
@@ -63,7 +64,7 @@ impl Priority {
         Self {
             irq: Interrupt::SWI_IRQ_1,
             executor: &EXECUTOR_MEDIUM,
-            prio: 1,
+            prio: Priority::P1,
         }
     }
 
@@ -71,24 +72,18 @@ impl Priority {
         Self {
             irq: Interrupt::SWI_IRQ_0,
             executor: &EXECUTOR_HIGH,
-            prio: 0,
+            prio: Priority::P0,
         }
     }
 }
 
-pub fn run_preemptive_task(prio: Priority, token: impl FnOnce(embassy_executor::SendSpawner) + Send + 'static) {
-    unsafe {
-        let mut nvic = cortex_m::Peripherals::steal().NVIC;
-        nvic.set_priority(prio.irq, prio.prio << 6);
-    }
+pub fn run_preemptive_task(prio: IrqPriority, token: impl FnOnce(SendSpawner) + Send + 'static) {
+    prio.irq.set_priority(prio.prio);
     let spawner = prio.executor.start(prio.irq);
     token(spawner);
 }
 
-pub fn run_task_on(
-    core1: embassy_rp::peripherals::CORE1,
-    token: impl FnOnce(embassy_executor::Spawner) + Send + 'static,
-) {
+pub fn run_task_on(core1: CORE1, token: impl FnOnce(embassy_executor::Spawner) + Send + 'static) {
     spawn_core1(core1, unsafe { &mut CORE1_STACK }, move || {
         let executor1 = EXECUTOR1.init(Executor::new());
         executor1.run(token);

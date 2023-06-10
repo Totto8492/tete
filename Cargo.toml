@@ -11,6 +11,7 @@ name = "{{project-name}}"
 [dependencies]
 embassy-embedded-hal = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy" }
 embassy-executor = { version = "0.2.0", features = [
+    "nightly",
     "arch-cortex-m",
     "executor-thread",
     "executor-interrupt",
@@ -40,8 +41,12 @@ embassy-time = { version = "0.1.0", features = [
 ], git = "https:///github.com/embassy-rs/embassy" }
 embassy-usb = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy" }
 embassy-usb-logger = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy" }
-cyw43 = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy", features = ["firmware-logs"] }
-cyw43-pio = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy", features = ["overclock"] }
+cyw43 = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy", features = [
+    "firmware-logs",
+] }
+cyw43-pio = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy", features = [
+    "overclock",
+] }
 static_cell = { version = "1.1.0", features = [
     "nightly",
 ], git = "https://github.com/embassy-rs/static-cell" }
