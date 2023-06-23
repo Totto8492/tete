@@ -40,7 +40,7 @@ mod sample {
 
     #[embassy_executor::task]
     pub(crate) async fn task(p: Peripherals) {
-        let mut led = Output::new(p.PIN_2, Level::High);
+        let mut led = Output::new(p.PIN_25, Level::High);
         loop {
             Timer::after(Duration::from_millis(200)).await;
             led.toggle();
