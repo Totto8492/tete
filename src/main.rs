@@ -2,9 +2,9 @@
 #![no_main]
 #![feature(type_alias_impl_trait)]
 
-use rtt_target as _;
-use rtt_target::rtt_init_print;
 use {{crate_name}}::run_task;
+use rtt_target::rtt_init_print;
+use rtt_target as _;
 
 fn clear_locks() {
     // https://github.com/rp-rs/rp-hal/blob/main/rp2040-hal-macros/src/lib.rs
