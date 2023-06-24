@@ -1,10 +1,12 @@
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 
-use {{crate_name}}::run_task;
+use embassy_rp::config::Config;
 use rtt_target::rtt_init_print;
-use rtt_target as _;
+use {{crate_name}}::run_task;
 
 fn clear_locks() {
     // https://github.com/rp-rs/rp-hal/blob/main/rp2040-hal-macros/src/lib.rs
@@ -26,7 +28,7 @@ fn main() -> ! {
     clear_locks();
     rtt_init_print!();
 
-    let p = embassy_rp::init(Default::default());
+    let p = embassy_rp::init(Config::default());
 
     run_task(|spawner| {
         spawner.spawn(sample::task(p)).unwrap();
@@ -39,7 +41,7 @@ mod sample {
     use embassy_time::{Duration, Timer};
 
     #[embassy_executor::task]
-    pub(crate) async fn task(p: Peripherals) {
+    pub async fn task(p: Peripherals) {
         let mut led = Output::new(p.PIN_25, Level::High);
         loop {
             Timer::after(Duration::from_millis(200)).await;

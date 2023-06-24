@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 
 use embassy_executor::Executor;
 use embassy_executor::_export::StaticCell;
