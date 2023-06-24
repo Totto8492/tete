@@ -1,14 +1,17 @@
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 
+use embassy_rp::config::Config;
 use embassy_rp::gpio::{Level, Output};
-use {{crate_name}}::{run_preemptive_task, run_task, run_task_on, Priority};
 use rtt_target::{rprintln, rtt_init_print};
+use {{crate_name}}::{run_preemptive_task, run_task, run_task_on, Priority};
 use {panic_rtt_target as _, rtt_target as _};
 
 mod tasks;
-use tasks::*;
+use tasks::{core0, core1, timeout};
 
 fn clear_locks() {
     // https://github.com/rp-rs/rp-hal/blob/main/rp2040-hal-macros/src/lib.rs
@@ -22,7 +25,7 @@ fn main() -> ! {
     clear_locks();
     rtt_init_print!();
     rprintln!("--- RESET ---");
-    let p = embassy_rp::init(Default::default());
+    let p = embassy_rp::init(Config::default());
 
     let led = Output::new(p.PIN_25, Level::Low);
 

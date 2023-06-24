@@ -1,15 +1,15 @@
 use embassy_time::{Duration, Instant, Timer, TICK_HZ};
 use rtt_target::rprintln;
 
-use crate::tasks::state::*;
+use crate::tasks::state::{Led, CHANNEL};
 
 #[embassy_executor::task]
 pub async fn task() {
     rprintln!("Hello from core 0");
     loop {
-        CHANNEL.send(LedState::On).await;
+        CHANNEL.send(Led::On).await;
         Timer::after(Duration::from_millis(100)).await;
-        CHANNEL.send(LedState::Off).await;
+        CHANNEL.send(Led::Off).await;
         Timer::after(Duration::from_millis(400)).await;
     }
 }
@@ -26,7 +26,7 @@ pub async fn run_high() {
         let ms = end.duration_since(start).as_ticks() * 1000 / TICK_HZ;
         rprintln!("    [high] done in {} ms", ms);
 
-        Timer::after(Duration::from_ticks(753421)).await;
+        Timer::after(Duration::from_ticks(753_421)).await;
     }
 }
 

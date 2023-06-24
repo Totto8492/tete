@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::nursery)]
 
 use embassy_executor::_export::StaticCell;
 use embassy_executor::{Executor, InterruptExecutor, SendSpawner};
@@ -20,22 +22,22 @@ static EXECUTOR_HIGH: InterruptExecutor = InterruptExecutor::new();
 
 #[embassy_rp::interrupt]
 unsafe fn SWI_IRQ_0() {
-    EXECUTOR_IDLE.on_interrupt()
+    EXECUTOR_IDLE.on_interrupt();
 }
 
 #[embassy_rp::interrupt]
 unsafe fn SWI_IRQ_1() {
-    EXECUTOR_LOW.on_interrupt()
+    EXECUTOR_LOW.on_interrupt();
 }
 
 #[embassy_rp::interrupt]
 unsafe fn SWI_IRQ_2() {
-    EXECUTOR_MEDIUM.on_interrupt()
+    EXECUTOR_MEDIUM.on_interrupt();
 }
 
 #[embassy_rp::interrupt]
 unsafe fn SWI_IRQ_3() {
-    EXECUTOR_HIGH.on_interrupt()
+    EXECUTOR_HIGH.on_interrupt();
 }
 
 pub fn run_preemptive_task(prio: Priority, token: impl FnOnce(SendSpawner) + Send + 'static) {
