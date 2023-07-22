@@ -9,12 +9,14 @@
             "cwd": "${workspaceFolder}",
             "chip": "rp2040",
             "runtimeArgs": [
-                "debug",
+                "dap-server",
             ],
+            "connectUnderReset": false,
             "flashingConfig": {
                 "flashingEnabled": true,
                 "resetAfterFlashing": true,
             },
+            "speed": 15000,
             "coreConfigs": [
                 {
                     "coreIndex": 0,
