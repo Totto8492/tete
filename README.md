@@ -1,6 +1,6 @@
 # tete
 
-## it's my template for rp2040
+## it's template for rp2040
 
 based on Embassy and rp2040-hal
 
