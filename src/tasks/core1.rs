@@ -8,7 +8,7 @@ use crate::tasks::state::{Led, CHANNEL};
 pub async fn task(mut led: Output<'static, PIN_25>) {
     rprintln!("Hello from core 1");
     loop {
-        match CHANNEL.recv().await {
+        match CHANNEL.receive().await {
             Led::On => led.set_high(),
             Led::Off => led.set_low(),
         }
