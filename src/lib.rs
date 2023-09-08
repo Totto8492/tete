@@ -5,10 +5,10 @@
 #![warn(clippy::nursery)]
 
 use embassy_executor::Executor;
-use embassy_executor::_export::StaticCell;
 pub use embassy_rp::interrupt::Priority;
 use embassy_rp::multicore::{spawn_core1, Stack};
 use embassy_rp::peripherals::CORE1;
+use static_cell::StaticCell;
 
 static mut CORE1_STACK: Stack<4096> = Stack::new();
 static EXECUTOR0: StaticCell<Executor> = StaticCell::new();
