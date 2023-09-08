@@ -10,7 +10,7 @@ name = "{{project-name}}"
 
 [dependencies]
 embassy-embedded-hal = { version = "0.1.0", git = "https:///github.com/embassy-rs/embassy" }
-embassy-executor = { version = "0.2.0", features = [
+embassy-executor = { version = "0.3.0", features = [
     "nightly",
     "arch-cortex-m",
     "executor-thread",
