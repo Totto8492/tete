@@ -34,13 +34,9 @@ rtt-target = "0.4.0"
 static_cell = "1.2.0"
 
 [profile.dev]
-codegen-units = 1
-opt-level = "z"
+opt-level = 1
 lto = "thin"
-overflow-checks = false
 
 [profile.release]
-codegen-units = 1
-opt-level = 3
+opt-level = "z"
 lto = "fat"
-overflow-checks = false
