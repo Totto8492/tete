@@ -18,9 +18,7 @@ fn clear_locks() {
 #[panic_handler]
 fn panic_handler(_: &core::panic::PanicInfo) -> ! {
     cortex_m::interrupt::disable();
-    loop {
-        cortex_m::asm::udf();
-    }
+    cortex_m::asm::udf();
 }
 
 #[cortex_m_rt::entry]
