@@ -42,7 +42,7 @@ mod sample {
     pub async fn task(p: Peripherals) {
         let mut led = Output::new(p.PIN_25, Level::High);
         loop {
-            Timer::after(Duration::from_millis(200)).await;
+            Timer::after_millis(200).await;
             led.toggle();
         }
     }
