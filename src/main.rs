@@ -36,7 +36,7 @@ fn main() -> ! {
 mod sample {
     use embassy_rp::gpio::{Level, Output};
     use embassy_rp::Peripherals;
-    use embassy_time::{Duration, Timer};
+    use embassy_time::Timer;
 
     #[embassy_executor::task]
     pub async fn task(p: Peripherals) {
