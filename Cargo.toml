@@ -32,6 +32,7 @@ cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 rtt-target = "0.4.0"
 static_cell = "2"
+portable-atomic = { version = "1.5", features = ["critical-section"] }
 
 [profile.dev]
 opt-level = 1
