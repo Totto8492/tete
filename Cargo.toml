@@ -31,7 +31,7 @@ embassy-time = { version = "0.1.4", features = [
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 rtt-target = "0.4.0"
-static_cell = "1.2.0"
+static_cell = "2"
 
 [profile.dev]
 opt-level = 1
