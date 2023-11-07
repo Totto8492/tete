@@ -33,6 +33,7 @@ cortex-m-rt = "0.7.3"
 rtt-target = "0.4.0"
 static_cell = "2"
 portable-atomic = { version = "1.5", features = ["critical-section"] }
+panic_rtt = "0.3.0"
 
 [profile.dev]
 opt-level = 1
