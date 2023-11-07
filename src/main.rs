@@ -10,6 +10,7 @@ use {{crate_name}}::core1::run_task;
 use {{crate_name}}::task::run_main;
 use embassy_rp::config::Config;
 use embassy_rp::gpio::Pin;
+use panic_rtt as _;
 use rtt_target::rtt_init_print;
 
 mod core0_main;
