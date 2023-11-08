@@ -11,6 +11,8 @@ use embassy_rp::pac;
 pub mod core1;
 pub mod task;
 
+pub mod ili9341;
+
 #[derive(Default)]
 pub enum Vreg {
     Vsel800MV = 0b0101,
@@ -67,7 +69,12 @@ pub fn set_default_clock() {
     });
 }
 
-pub fn set_under_clock() {
+/// Reduce clock frequency and voltage.
+///
+/// # Safety
+///
+/// Temperature, voltage, and other factors may damage the memory.
+pub unsafe fn set_under_clock() {
     pac::PLL_SYS.fbdiv_int().modify(|w| w.set_fbdiv_int(63));
     pac::PLL_SYS.prim().modify(|w| {
         w.set_postdiv1(7);
