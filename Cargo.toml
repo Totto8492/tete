@@ -31,9 +31,9 @@ embassy-time = { version = "0.1.4", features = [
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 panic-rtt-target = { version = "0.1.2", features = ["cortex-m"] }
-static_cell = "2"
 portable-atomic = { version = "1.5", features = ["critical-section"] }
-panic_rtt = "0.3.0"
+rtt-target = "0.4.0"
+static_cell = "2"
 
 [profile.dev]
 opt-level = 1
