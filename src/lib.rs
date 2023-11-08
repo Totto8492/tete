@@ -11,8 +11,6 @@ use embassy_rp::pac;
 pub mod core1;
 pub mod task;
 
-pub mod ili9341;
-
 #[derive(Default)]
 pub enum Vreg {
     Vsel800MV = 0b0101,
