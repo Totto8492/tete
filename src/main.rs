@@ -6,10 +6,10 @@
 #![warn(clippy::pedantic)]
 #![warn(clippy::nursery)]
 
-// use embassy_rp::clocks::ClockConfig;
 use embassy_rp::config::Config;
+use embassy_rp::dma::Channel;
 use embassy_rp::gpio::Pin;
-use panic_rtt as _;
+use panic_rtt_target as _;
 use rtt_target::{rprintln, rtt_init_print};
 
 mod core0_main;
