@@ -7,7 +7,6 @@
 #![warn(clippy::nursery)]
 
 use embassy_rp::config::Config;
-use embassy_rp::dma::Channel;
 use embassy_rp::gpio::Pin;
 use panic_rtt_target as _;
 use rtt_target::{rprintln, rtt_init_print};
