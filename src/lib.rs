@@ -51,9 +51,6 @@ pub fn set_default_clock() {
     pac::VREG_AND_CHIP_RESET
         .vreg()
         .modify(|w| w.set_vsel(Vreg::default() as u8));
-    pac::VREG_AND_CHIP_RESET
-        .bod()
-        .modify(|w| w.set_vsel(Bod::default() as u8));
 
     cortex_m::asm::delay(2800); // at least 350 microsecond
 
@@ -86,11 +83,8 @@ pub fn set_under_clock() {
     cortex_m::asm::delay(2800); // at least 350 microsecond
 
     pac::VREG_AND_CHIP_RESET
-        .bod()
-        .modify(|w| w.set_vsel(Bod::Bod817MV as u8));
-    pac::VREG_AND_CHIP_RESET
         .vreg()
-        .modify(|w| w.set_vsel(Vreg::Vsel850MV as u8));
+        .modify(|w| w.set_vsel(Vreg::Vsel900MV as u8));
 }
 
 pub fn clear_locks() {
