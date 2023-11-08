@@ -11,6 +11,8 @@ use embassy_rp::pac;
 pub mod core1;
 pub mod task;
 
+pub mod ili9341;
+
 #[derive(Default)]
 pub enum Vreg {
     Vsel800MV = 0b0101,
@@ -51,9 +53,6 @@ pub fn set_default_clock() {
     pac::VREG_AND_CHIP_RESET
         .vreg()
         .modify(|w| w.set_vsel(Vreg::default() as u8));
-    pac::VREG_AND_CHIP_RESET
-        .bod()
-        .modify(|w| w.set_vsel(Bod::default() as u8));
 
     cortex_m::asm::delay(2800); // at least 350 microsecond
 
@@ -70,7 +69,12 @@ pub fn set_default_clock() {
     });
 }
 
-pub fn set_under_clock() {
+/// Reduce clock frequency and voltage.
+///
+/// # Safety
+///
+/// Temperature, voltage, and other factors may damage the memory.
+pub unsafe fn set_under_clock() {
     pac::PLL_SYS.fbdiv_int().modify(|w| w.set_fbdiv_int(63));
     pac::PLL_SYS.prim().modify(|w| {
         w.set_postdiv1(7);
@@ -86,11 +90,8 @@ pub fn set_under_clock() {
     cortex_m::asm::delay(2800); // at least 350 microsecond
 
     pac::VREG_AND_CHIP_RESET
-        .bod()
-        .modify(|w| w.set_vsel(Bod::Bod817MV as u8));
-    pac::VREG_AND_CHIP_RESET
         .vreg()
-        .modify(|w| w.set_vsel(Vreg::Vsel850MV as u8));
+        .modify(|w| w.set_vsel(Vreg::Vsel900MV as u8));
 }
 
 pub fn clear_locks() {
