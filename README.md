@@ -1,8 +1,9 @@
 # tete
 
-## it's template for rp2040
+## This is a template project for my personal hobby
+It contains many destructive and experimental changes.
 
-based on Embassy and rp2040-hal
+Based on Embassy and rp2040-hal examples, templates, etc.
 
 ```bash
 cargo generate totto8492/tete -n your_project_name
