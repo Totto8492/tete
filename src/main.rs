@@ -13,10 +13,7 @@ use rtt_target::{rprintln, rtt_init_print};
 
 mod core0_main;
 mod core1_main;
-
-use {{crate_name}}::core0_task;
-use {{crate_name}}::core1_task;
-use {{crate_name}}::{clear_locks, set_default_clock};
+use {{crate_name}}::{clear_locks, set_default_clock,task};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -27,9 +24,9 @@ fn main() -> ! {
     let p = embassy_rp::init(Config::default());
     rprintln!("init");
 
-    core1_task::run(p.CORE1, |spawner| spawner.spawn(core1_main::task()).unwrap());
+    task::run_on(p.CORE1, |spawner| spawner.spawn(core1_main::task()).unwrap());
 
-    core0_task::run(|spawner| {
+    task::run(|spawner| {
         spawner.spawn(core0_main::task(p.PIN_25.degrade())).unwrap();
     });
 }

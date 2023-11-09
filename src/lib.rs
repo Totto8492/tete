@@ -8,8 +8,7 @@
 
 use embassy_rp::pac;
 
-pub mod core0_task;
-pub mod core1_task;
+pub mod task;
 
 #[derive(Default)]
 pub enum Vreg {
