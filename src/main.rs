@@ -4,7 +4,7 @@
 #![feature(async_fn_in_trait)]
 #![allow(stable_features, unknown_lints, async_fn_in_trait)]
 #![warn(clippy::pedantic)]
-#![warn(clippy::nursery)]
+//#![warn(clippy::nursery)]
 
 use embassy_rp::config::Config;
 use embassy_rp::gpio::Pin;
