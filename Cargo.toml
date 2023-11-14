@@ -9,13 +9,13 @@ name = "{{project-name}}"
 [lib]
 
 [dependencies]
-embassy-executor = { version = "0.3.2", features = [
+embassy-executor = { features = [
     "nightly",
     "arch-cortex-m",
     "executor-thread",
     "integrated-timers",
 ], git = "https:///github.com/embassy-rs/embassy" }
-embassy-rp = { version = "0.1.0", features = [
+embassy-rp = { features = [
     "unstable-traits",
     "nightly",
     "unstable-pac",
@@ -23,9 +23,12 @@ embassy-rp = { version = "0.1.0", features = [
     "critical-section-impl",
     "intrinsics",
 ], git = "https:///github.com/embassy-rs/embassy" }
-embassy-time = { version = "0.1.4", features = [
+embassy-time = { features = [
     "nightly",
     "unstable-traits",
+], git = "https:///github.com/embassy-rs/embassy" }
+embassy-sync = { features = [
+    "nightly",
 ], git = "https:///github.com/embassy-rs/embassy" }
 
 cortex-m = "0.7.7"
