@@ -2,7 +2,7 @@ use embassy_executor::SendSpawner;
 use embassy_rp::gpio::{AnyPin, Level, Output, Pin};
 use embassy_rp::Peripherals;
 use embassy_time::{Instant, Timer};
-use tete_test::task::run_on;
+use {{crate_name}}::task::run_on;
 
 use crate::core1_main;
 
