@@ -5,26 +5,18 @@ edition = "2021"
 
 [dependencies]
 embassy-executor = { features = [
-    "nightly",
     "arch-cortex-m",
     "executor-thread",
     "integrated-timers",
 ], git = "https:///github.com/embassy-rs/embassy" }
 embassy-rp = { features = [
-    "unstable-traits",
-    "nightly",
     "unstable-pac",
     "time-driver",
     "critical-section-impl",
     "intrinsics",
 ], git = "https:///github.com/embassy-rs/embassy" }
-embassy-time = { features = [
-    "nightly",
-    "unstable-traits",
-], git = "https:///github.com/embassy-rs/embassy" }
-embassy-sync = { features = [
-    "nightly",
-], git = "https:///github.com/embassy-rs/embassy" }
+embassy-time = { git = "https:///github.com/embassy-rs/embassy" }
+embassy-sync = { git = "https:///github.com/embassy-rs/embassy" }
 
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
