@@ -15,8 +15,8 @@ embassy-rp = { features = [
     "critical-section-impl",
     "intrinsics",
 ], git = "https:///github.com/embassy-rs/embassy" }
-embassy-time = { git = "https:///github.com/embassy-rs/embassy" }
-embassy-sync = { git = "https:///github.com/embassy-rs/embassy" }
+embassy-time = { git = "https://github.com/embassy-rs/embassy" }
+embassy-sync = { git = "https://github.com/embassy-rs/embassy" }
 
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
