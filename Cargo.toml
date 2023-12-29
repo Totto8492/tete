@@ -17,6 +17,9 @@ embassy-rp = { version = "0.1.0", git = "https://github.com/embassy-rs/embassy.g
     "unstable-pac",
     "time-driver",
     "critical-section-impl",
+    "rom-func-cache",
+    "intrinsics",
+    "rom-v2-intrinsics",
 ] }
 # embassy-usb = { version = "0.1.0", git = "https://github.com/embassy-rs/embassy.git" }
 # embassy-net = { version = "0.2.0", git = "https://github.com/embassy-rs/embassy.git", features = [
