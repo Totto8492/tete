@@ -5,18 +5,15 @@
             "preLaunchTask": "rust: cargo build",
             "type": "probe-rs-debug",
             "request": "launch",
-            "name": "{{project-name}}",
+            "name": "probe-rs Debug",
             "cwd": "${workspaceFolder}",
-            "chip": "rp2040",
-            "runtimeArgs": [
-                "dap-server",
-            ],
             "connectUnderReset": false,
+            "chip": "rp2040",
             "flashingConfig": {
                 "flashingEnabled": true,
-                "resetAfterFlashing": true,
+                "haltAfterReset": true
             },
-            "speed": 15000,
+            "speed": 20000,
             "coreConfigs": [
                 {
                     "coreIndex": 0,
@@ -25,27 +22,7 @@
                     "svdFile": ".vscode/rp2040.svd",
                     "rttEnabled": true,
                 }
-            ],
-            "consoleLogLevel": "Console",
-        },
-        {
-            "cwd": "${workspaceRoot}",
-            "executable": "target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}",
-            "name": "Debug with OpenOCD",
-            "request": "launch",
-            "openOCDLaunchCommands": [
-                "program target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}"
-            ],
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "configFiles": [
-                "interface/cmsis-dap.cfg",
-                "target/rp2040.cfg"
-            ],
-            "searchDir": [],
-            "runToEntryPoint": "main",
-            "showDevDebugOutput": "none",
-            "numberOfProcessors": 2
+            ]
         }
     ]
 }
