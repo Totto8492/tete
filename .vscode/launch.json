@@ -8,18 +8,17 @@
             "name": "probe-rs Debug",
             "cwd": "${workspaceFolder}",
             "connectUnderReset": false,
-            "chip": "rp2040",
+            "chip": "STM32G031J6Mx",
             "flashingConfig": {
                 "flashingEnabled": true,
-                "haltAfterReset": true
+                "haltAfterReset": false
             },
             "speed": 20000,
             "coreConfigs": [
                 {
                     "coreIndex": 0,
                     "programBinary": "target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}",
-                    "chip": "RP2040",
-                    "svdFile": ".vscode/rp2040.svd",
+                    "chip": "STM32G031J6Mx",
                     "rttEnabled": true,
                 }
             ]
