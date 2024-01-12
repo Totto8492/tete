@@ -5,13 +5,13 @@ edition = "2021"
 
 [dependencies]
 embassy-sync = { version = "0.5.0", git = "https://github.com/embassy-rs/embassy.git" }
-embassy-executor = { version = "0.4.0", git = "https://github.com/embassy-rs/embassy.git", features = [
+embassy-executor = { version = "0.5.0", git = "https://github.com/embassy-rs/embassy.git", features = [
     "arch-cortex-m",
     "executor-thread",
     "executor-interrupt",
     "integrated-timers",
 ] }
-embassy-time = { version = "0.2", git = "https://github.com/embassy-rs/embassy.git" }
+embassy-time = { version = "0.3.0", git = "https://github.com/embassy-rs/embassy.git" }
 embassy-rp = { version = "0.1.0", git = "https://github.com/embassy-rs/embassy.git", features = [
     "unstable-pac",
     "time-driver",
