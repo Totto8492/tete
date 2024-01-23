@@ -7,7 +7,6 @@ use embassy_executor::Executor;
 use embassy_rp::config::Config;
 use embassy_rp::gpio::{Level, Output};
 use embassy_rp::multicore::{spawn_core1, Stack};
-use embassy_rp::peripherals::PIN_25;
 use embassy_sync::blocking_mutex::raw::CriticalSectionRawMutex;
 use embassy_sync::channel::Channel;
 use embassy_time::Timer;
@@ -61,7 +60,7 @@ async fn core0_task() {
 }
 
 #[embassy_executor::task]
-async fn core1_task(mut led: Output<'static, PIN_25>) {
+async fn core1_task(mut led: Output<'static>) {
     rprintln!("Hello from core 1");
     loop {
         match CHANNEL.receive().await {
