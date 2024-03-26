@@ -41,7 +41,7 @@ fn main() -> ! {
 
     spawn_core1(
         p.CORE1,
-        unsafe { core::ptr::addr_of_mut!(CORE1_STACK).as_mut().unwrap() },
+        unsafe { &mut *core::ptr::addr_of_mut!(CORE1_STACK) },
         move || {
             let executor1 = EXECUTOR1.init(Executor::new());
             executor1.run(|spawner| spawner.spawn(core1_task(led)).unwrap());
