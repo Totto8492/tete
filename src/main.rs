@@ -39,10 +39,14 @@ fn main() -> ! {
     let p = embassy_rp::init(Config::default());
     let led = Output::new(p.PIN_25, Level::Low);
 
-    spawn_core1(p.CORE1, unsafe { &mut CORE1_STACK }, move || {
-        let executor1 = EXECUTOR1.init(Executor::new());
-        executor1.run(|spawner| spawner.spawn(core1_task(led)).unwrap());
-    });
+    spawn_core1(
+        p.CORE1,
+        unsafe { core::ptr::addr_of_mut!(CORE1_STACK).as_mut().unwrap() },
+        move || {
+            let executor1 = EXECUTOR1.init(Executor::new());
+            executor1.run(|spawner| spawner.spawn(core1_task(led)).unwrap());
+        },
+    );
 
     let executor0 = EXECUTOR0.init(Executor::new());
     executor0.run(|spawner| spawner.spawn(core0_task()).unwrap())
