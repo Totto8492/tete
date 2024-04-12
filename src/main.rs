@@ -26,11 +26,11 @@ enum LedState {
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    rtt_init_print!();
-
     for i in 0..32 {
         embassy_rp::pac::SIO.spinlock(i).write_value(1);
     }
+
+    rtt_init_print!();
 
     let p = embassy_rp::init(Config::default());
     let led = Output::new(p.PIN_0, Level::Low);
