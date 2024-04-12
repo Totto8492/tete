@@ -1,13 +1,7 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "probe-rs run --chip RP2040"
-# runner = "picotool load -f -x -t elf"
+runner = "probe-rs run --chip rp2040 --protocol swd"
+
+rustflags = ["-C", "inline-threshold=5", "-C", "no-vectorize-loops"]
 
 [build]
-target = "thumbv6m-none-eabi" # Cortex-M0 and Cortex-M0+
-rustflags = [
-    # Code-size optimizations.
-    "-C",
-    "inline-threshold=5",
-    "-C",
-    "no-vectorize-loops",
-]
+target = "thumbv6m-none-eabi"

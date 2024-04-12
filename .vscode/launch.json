@@ -2,25 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "rust: cargo build",
             "type": "probe-rs-debug",
             "request": "launch",
-            "name": "probe-rs Debug",
+            "preLaunchTask": "rust: cargo build",
+            "name": "probe-rs Test",
             "cwd": "${workspaceFolder}",
-            "connectUnderReset": false,
             "chip": "rp2040",
             "flashingConfig": {
                 "flashingEnabled": true,
-                "haltAfterReset": true
             },
-            "speed": 20000,
             "coreConfigs": [
                 {
                     "coreIndex": 0,
                     "programBinary": "target/thumbv6m-none-eabi/debug/${workspaceFolderBasename}",
-                    "chip": "RP2040",
-                    "svdFile": ".vscode/rp2040.svd",
-                    "rttEnabled": true,
+                    "rttEnabled": true
                 }
             ]
         }
