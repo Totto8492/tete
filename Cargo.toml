@@ -35,7 +35,7 @@ embassy-rp = { version = "0.1.0", git = "https://github.com/embassy-rs/embassy.g
     "intrinsics",
     "rom-v2-intrinsics",
 ] }
-embassy-sync = { version = "0.5.0", git = "https://github.com/embassy-rs/embassy.git" }
+embassy-sync = { version = "0.6.0", git = "https://github.com/embassy-rs/embassy.git" }
 embassy-time = { version = "0.3.0", git = "https://github.com/embassy-rs/embassy.git" }
 embassy-usb = { version = "0.2.0", git = "https://github.com/embassy-rs/embassy.git" }
 embassy-usb-logger = { version = "0.2.0", git = "https://github.com/embassy-rs/embassy.git" }
