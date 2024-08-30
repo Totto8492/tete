@@ -34,6 +34,7 @@ embassy-rp = { version = "0.2.0", git = "https://github.com/embassy-rs/embassy.g
     "rom-func-cache",
     "intrinsics",
     "rom-v2-intrinsics",
+    "rp2040",
 ] }
 embassy-sync = { version = "0.6.0", git = "https://github.com/embassy-rs/embassy.git" }
 embassy-time = { version = "0.3.1", git = "https://github.com/embassy-rs/embassy.git" }
